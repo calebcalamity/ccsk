@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skins Storage</title>
+    <script>
+        function handleInput(event) {
+            if (event.key === "Enter") {
+                const inputValue = event.target.value.toLowerCase();
+                if (inputValue === "gallery1") {
+                    window.location.href = "galleryas.html";
+                } else {
+                    alert("Unknown command: " + inputValue);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Skins Storage</h1>
+    <a href="skins/美的肌1.0.osk" download>
+        <button>Download Skins</button>
+    </a>
+    <br><br>
+    <input type="text" id="commandInput" placeholder="Type a command and press Enter" onkeypress="handleInput(event)">
+    <!-- Your content goes here -->
+</body>
+</html>

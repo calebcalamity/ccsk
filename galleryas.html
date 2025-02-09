@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .gallery img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const galleryContainer = document.getElementById("galleryContainer");
+            const images = [];
+
+            for (let i = 237; i <= 246; i++) {
+                images.push(`screenshot${i}.png`);
+            }
+
+            images.forEach(image => {
+                const imgElement = document.createElement("img");
+                imgElement.src = `/screenshots/aesthetic/${image}`;
+                imgElement.alt = image;
+                galleryContainer.appendChild(imgElement);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Gallery</h1>
+    <div id="galleryContainer" class="gallery"></div>
+    <!-- Your content goes here -->
+</body>
+</html>
