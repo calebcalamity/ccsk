@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other Skins</title>
+    <style>
+        @font-face {
+            font-family: 'TorusBold';
+            src: url('fonts/torusbold.otf') format('opentype');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            perspective: 1px; /* Create a 3D space */
+        }
+
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+        }
+
+        .parallax-layer.bg {
+            background: url('sdns/backgroundsww.png') no-repeat center center fixed;
+            background-size: cover;
+            transform: translateZ(-1px) scale(2); /* Move the background layer back and scale it up */
+        }
+
+        .parallax-layer.fg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top-bar {
+            background-color: grey;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .sigma-button {
+            font-family: 'TorusBold', Arial, sans-serif;
+            background: url('sdns/buttonss.png') no-repeat center center;
+            background-size: cover;
+            width: 200px; /* Adjust width based on your image size */
+            height: 60px; /* Adjust height based on your image size */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .sigma-button:hover {
+            opacity: 0.8; /* Add a hover effect */
+        }
+
+        .sigma-button.expanded {
+            width: 300px; /* Adjust expanded width */
+            height: 90px; /* Adjust expanded height */
+        }
+    </style>
+    <script>
+        function expandButton() {
+            const button = document.querySelector('.sigma-button');
+            button.classList.toggle('expanded');
+        }
+
+        document.addEventListener('mousemove', function(e) {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            const parallaxLayer = document.querySelector('.parallax-layer.bg');
+            parallaxLayer.style.transform = `translate(${x * 10}px, ${y * 10}px) scale(2)`;
+        });
+    </script>
+</head>
+<body>
+    <div class="top-bar">
+        <button onclick="window.location.href='index.html'">Back to Skins Storage</button>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax-layer bg"></div>
+        <div class="parallax-layer fg">
+            <div class="content">
+                <h1>Other Skins</h1>
+                <button class="sigma-button" onclick="expandButton(); window.location.href='so-sigma-commission.html'">So Sigma (COMMISSION)</button>
+                <!-- Your content for other skins goes here -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -4,6 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skins Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        .top-bar {
+            background-color: grey;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .container {
+            margin-top: 60px; /* Adjust margin-top to avoid overlap with the fixed top bar */
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
     <script>
         function handleInput(event) {
             if (event.key === "Enter") {
@@ -18,20 +67,25 @@
     </script>
 </head>
 <body>
-    <h1>Skins Storage</h1>
-    <a href="skins/美的肌1.0.osk" download>
-        <button>Download ASNM</button>
-    </a>
-    <br><br>
-    <a href="skins/美的肌-《DT》-.osk" download>
-        <button>Download 美的肌[DT]</button>
-    </a>
-    <br><br>
-    <a href="skins/美的肌1.0.1.osk" download>
-        <button>Download 美的肌1.0.1</button>
-    </a>
-    <br><br>
-    <input type="text" id="commandInput" placeholder="Type a command and press Enter" onkeypress="handleInput(event)">
-    <!-- Your content goes here -->
+    <div class="top-bar">
+        <button onclick="window.location.href='otherskins-comms.html'">Other Skins</button>
+    </div>
+    <div class="container">
+        <h1>Skins Storage</h1>
+        <a href="skins/美的肌1.0.osk" download>
+            <button>Download ASNM</button>
+        </a>
+        <br><br>
+        <a href="skins/美的肌-《DT》-.osk" download>
+            <button>Download 美的肌[DT]</button>
+        </a>
+        <br><br>
+        <a href="skins/美的肌1.0.1.osk" download>
+            <button>Download 美的肌1.0.1</button>
+        </a>
+        <br><br>
+        <input type="text" id="commandInput" placeholder="Type a command and press Enter" onkeypress="handleInput(event)">
+	Website Redesign Soon
+    </div>
 </body>
 </html>
