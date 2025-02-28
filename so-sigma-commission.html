@@ -59,10 +59,28 @@
             padding: 10px;
             position: fixed;
             width: 100%;
-            top: 0;
+            top: -50px; /* Initial hidden position */
             left: 0;
             text-align: center;
             z-index: 1000;
+            transition: top 0.3s; /* Smooth transition */
+        }
+
+        .show-top-bar {
+            top: 0; /* Show position */
+        }
+
+        .top-bar button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-family: 'TorusBold', Arial, sans-serif;
+            cursor: pointer;
+            margin: 0 10px; /* Add margin between buttons */
+        }
+
+        .top-bar button:hover {
+            color: yellow; /* Change color on hover */
         }
 
         h1 {
@@ -125,11 +143,20 @@
             const parallaxLayer = document.querySelector('.parallax-layer.bg');
             parallaxLayer.style.transform = `translate(${x * 10}px, ${y * 10}px) scale(2)`;
         });
+
+        document.addEventListener('mousemove', function(e) {
+            const topBar = document.querySelector('.top-bar');
+            if (e.clientY < 50) {
+                topBar.classList.add('show-top-bar');
+            } else {
+                topBar.classList.remove('show-top-bar');
+            }
+        });
     </script>
 </head>
 <body>
     <div class="top-bar">
-        <button onclick="window.location.href='index.html'">Back to Skins Storage</button>
+        <button onclick="window.location.href='index.html'">back 2 private releases :o</button>
     </div>
     <div class="parallax-container">
         <div class="parallax-layer bg"></div>

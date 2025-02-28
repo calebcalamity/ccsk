@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美的肌</title>
+    <style>
+        @font-face {
+            font-family: 'TorusBold';
+            src: url('fonts/torusbold.otf') format('opentype');
+        }
+
+        body {
+            font-family: 'TorusBold', Arial, sans-serif;
+            margin: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-color: black; /* Change background color to black */
+        }
+
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            perspective: 1px; /* Create a 3D space */
+        }
+
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+        }
+
+        .parallax-layer.bg {
+            background: url('sdns/bg2.png') no-repeat center center fixed; /* Update the background image */
+            background-size: cover;
+            transform: translateZ(-1px) scale(2); /* Move the background layer back and scale it up */
+        }
+
+        .parallax-layer.fg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top-bar {
+            background-color: grey;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: -50px; /* Initial hidden position */
+            left: 0;
+            text-align: center;
+            z-index: 1000;
+            transition: top 0.3s; /* Smooth transition */
+        }
+
+        .show-top-bar {
+            top: 0; /* Show position */
+        }
+
+        .top-bar button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-family: 'TorusBold', Arial, sans-serif;
+            cursor: pointer;
+            margin: 0 10px; /* Add margin between buttons */
+        }
+
+        .top-bar button:hover {
+            color: yellow; /* Change color on hover */
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .aesk-button {
+            font-family: 'TorusBold', Arial, sans-serif;
+            background: url('sdns/buttonsa.png') no-repeat center center;
+            background-size: cover;
+            width: 200px; /* Adjust width based on your image size */
+            height: 60px; /* Adjust height based on your image size */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .aesk-button:hover {
+            opacity: 0.8; /* Add a hover effect */
+        }
+
+        .aesk-button.expanded {
+            width: 300px; /* Adjust expanded width */
+            height: 90px; /* Adjust expanded height */
+        }
+
+        .star {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('sdns/star2.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0;
+            pointer-events: none;
+            animation: float 3s ease-out forwards;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px) scale(0.5);
+            }
+        }
+
+        .description {
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .aesthetic-img {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            opacity: 0.5;
+            animation: flyAcross 30s linear infinite;
+        }
+
+        @keyframes flyAcross {
+            0% {
+                left: -10%;
+            }
+            50% {
+                left: 110%;
+            }
+            100% {
+                left: -10%;
+            }
+        }
+    </style>
+    <script>
+        function expandButton() {
+            const button = document.querySelector('.aesk-button');
+            button.classList.toggle('expanded');
+            window.location.href = 'skins/美的肌1.0.1.osk';
+            createStarFountain();
+        }
+
+        function createStarFountain() {
+            const container = document.querySelector('.content');
+            const button = document.querySelector('.aesk-button');
+            const buttonRect = button.getBoundingClientRect();
+            const starCount = 20;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const angle = (i / starCount) * Math.PI * 2;
+                const x = Math.cos(angle) * buttonRect.width / 2 + buttonRect.width / 2;
+                const y = Math.sin(angle) * buttonRect.height / 2 + buttonRect.height / 2;
+
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+                star.style.animationDelay = `${Math.random() * 0.5}s`;
+
+                container.appendChild(star);
+
+                setTimeout(() => {
+                    star.remove();
+                }, 3000); // Remove star after the animation ends
+            }
+        }
+
+        function createAestheticImages() {
+            const bgLayer = document.querySelector('.parallax-layer.bg');
+            for (let i = 0; i < 6; i++) {
+                const img = document.createElement('img');
+                img.src = 'sdns/aesthetic.png';
+                img.classList.add('aesthetic-img');
+                img.style.top = `${Math.random() * 80 + 10}%`; // Random position to avoid overlap with buttons
+                img.style.animationDelay = `${Math.random() * 15}s`; // Stagger the animations
+                bgLayer.appendChild(img);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', createAestheticImages);
+
+        document.addEventListener('mousemove', function(e) {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            const parallaxLayer = document.querySelector('.parallax-layer.bg');
+            parallaxLayer.style.transform = `translate(${x * 10}px, ${y * 10}px) scale(2)`;
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            const topBar = document.querySelector('.top-bar');
+            if (e.clientY < 50) {
+                topBar.classList.add('show-top-bar');
+            } else {
+                topBar.classList.remove('show-top-bar');
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="top-bar">
+        <button onclick="window.location.href='index.html'">back to my silly skins :3</button>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax-layer bg"></div>
+        <div class="parallax-layer fg">
+            <div class="content">
+                <button class="aesk-button" onclick="expandButton()">Download The Skin</button>
+                <div class="description">
+                    My second skin, I will not really take this one as seriously as complexity. Currently, the latest version is 1.0.1.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,12 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skins Storage</title>
+    <title>my silly skins :3</title>
     <style>
+        @font-face {
+            font-family: 'TorusBold';
+            src: url('fonts/torusbold.otf') format('opentype');
+        }
+
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
+            margin: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            perspective: 1px; /* Create a 3D space */
+        }
+
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+        }
+
+        .parallax-layer.bg {
+            background: url('sdns/sheiste.png') no-repeat center center fixed;
+            background-size: cover;
+            transform: translateZ(-1px) scale(2); /* Move the background layer back and scale it up */
+        }
+
+        .parallax-layer.fg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .top-bar {
@@ -17,14 +59,28 @@
             padding: 10px;
             position: fixed;
             width: 100%;
-            top: 0;
+            top: -50px; /* Initial hidden position */
             left: 0;
             text-align: center;
             z-index: 1000;
+            transition: top 0.3s; /* Smooth transition */
         }
 
-        .container {
-            margin-top: 60px; /* Adjust margin-top to avoid overlap with the fixed top bar */
+        .show-top-bar {
+            top: 0; /* Show position */
+        }
+
+        .top-bar button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-family: 'TorusBold', Arial, sans-serif;
+            cursor: pointer;
+            margin: 0 10px; /* Add margin between buttons */
+        }
+
+        .top-bar button:hover {
+            text-decoration: underline; /* Add underline on hover */
         }
 
         h1 {
@@ -52,6 +108,28 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
+        .sigma-button {
+            font-family: 'TorusBold', Arial, sans-serif;
+            background: url('sdns/buttonss.png') no-repeat center center;
+            background-size: cover;
+            width: 200px; /* Adjust width based on your image size */
+            height: 60px; /* Adjust height based on your image size */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .sigma-button:hover {
+            opacity: 0.8; /* Add a hover effect */
+        }
+
+        .sigma-button.expanded {
+            width: 300px; /* Adjust expanded width */
+            height: 90px; /* Adjust expanded height */
+        }
     </style>
     <script>
         function handleInput(event) {
@@ -64,28 +142,46 @@
                 }
             }
         }
+
+        function expandButton() {
+            const button = document.querySelector('.sigma-button');
+            button.classList.toggle('expanded');
+        }
+
+        document.addEventListener('mousemove', function(e) {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            const parallaxLayer = document.querySelector('.parallax-layer.bg');
+            parallaxLayer.style.transform = `translate(${x * 10}px, ${y * 10}px) scale(2)`;
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            const topBar = document.querySelector('.top-bar');
+            if (e.clientY < 50) {
+                topBar.classList.add('show-top-bar');
+            } else {
+                topBar.classList.remove('show-top-bar');
+            }
+        });
     </script>
 </head>
 <body>
     <div class="top-bar">
-        <button onclick="window.location.href='otherskins-comms.html'">Other Skins</button>
+        <button onclick="window.location.href='otherskins-comms.html'">private releases :3</button>
     </div>
-    <div class="container">
-        <h1>Skins Storage</h1>
-        <a href="skins/美的肌1.0.osk" download>
-            <button>Download ASNM</button>
-        </a>
-        <br><br>
-        <a href="skins/美的肌-《DT》-.osk" download>
-            <button>Download 美的肌[DT]</button>
-        </a>
-        <br><br>
-        <a href="skins/美的肌1.0.1.osk" download>
-            <button>Download 美的肌1.0.1</button>
-        </a>
-        <br><br>
-        <input type="text" id="commandInput" placeholder="Type a command and press Enter" onkeypress="handleInput(event)">
-	Website Redesign Soon
+    <div class="parallax-container">
+        <div class="parallax-layer bg"></div>
+        <div class="parallax-layer fg">
+            <div class="content">
+                <h1>my silly skins :3</h1>
+                <br><br>
+                <a href="aesk.html" download>
+                    <button>Download 美的肌</button>
+                </a>
+                <br><br>
+                <input type="text" id="commandInput" placeholder="Type a command and press Enter" onkeypress="handleInput(event)">
+            </div>
+        </div>
     </div>
 </body>
 </html>
